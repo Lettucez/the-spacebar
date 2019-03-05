@@ -39,7 +39,8 @@ class ArticleController extends AbstractController
     public function show($article)
     {
         return $this->render('article/show.html.twig', [
-            'article' => $article,
+            'title' => $article,
+            'subtitle' => 'this is the subtitle',
             'items' => [
                 'item1', 'item2', 'item3'
             ]

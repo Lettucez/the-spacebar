@@ -7,13 +7,17 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
-<body class="has-background-light">
+<body>
 
 {% block nav %}
     {{ include('layout/navbar/navbar.html.twig') }}
 {% endblock %}
 
-<div class="section">
+{% block hero %}
+    {{ include('layout/hero/hero.html.twig') }}
+{% endblock %}
+
+<div class="section has-background-light">
     <div class="columns">
         <div class="column">
             <div class="container">
@@ -25,6 +29,10 @@
         </div>
     </div>
 </div>
+
+{% block footer %}
+    {{ include('layout/footer/footer.html.twig') }}
+{% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
