@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="box">
+        <div class="content">
+            <h2>This is the home page.</h2>
+            <p>Not much stuff going on tbh fam</p>
+            
+            <p>Article 1: <a href="{{ path('article_show', {article: 'what-killed-the-dinosaurs?'}) }}"></a></p>
+        </div>
+    </div>
+
+{% endblock %}

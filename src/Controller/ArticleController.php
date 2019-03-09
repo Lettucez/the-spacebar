@@ -20,11 +20,11 @@ class ArticleController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      */
     public function homepage()
     {
-        return new Response("Hello Bros");
+        return $this->render('app/home.html.twig');
     }
 
     /**
@@ -34,11 +34,11 @@ class ArticleController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/news/{article}")
+     * @Route("/news/{article}", name="article_show")
      */
     public function show($article)
     {
-        return $this->render('article/show.html.twig', [
+        return $this->render('article/article.html.twig', [
             'title' => $article,
             'subtitle' => 'this is the subtitle',
             'comments' => [
