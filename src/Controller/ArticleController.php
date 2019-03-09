@@ -24,7 +24,10 @@ class ArticleController extends AbstractController
      */
     public function homepage()
     {
-        return $this->render('app/home.html.twig');
+        return $this->render('app/home.html.twig', [
+            'title' => 'Home',
+            'subtitle' => 'pretty baller'
+        ]);
     }
 
     /**
@@ -39,7 +42,7 @@ class ArticleController extends AbstractController
     public function show($article)
     {
         return $this->render('article/article.html.twig', [
-            'title' => $article,
+            'title' => str_replace('-', ' ', $article),
             'subtitle' => 'this is the subtitle',
             'comments' => [
                 'comment1', 'comment2', 'comment3'
