@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,14 +34,18 @@ class ArticleController extends AbstractController
     /**
      * Shows an article.
      *
+     * @param EntityManagerInterface $entityManager
      * @param string $article Contains the url text after /news/.
      *
      * @return Response
      *
      * @Route("/news/{article}", name="article_show")
      */
-    public function show($article)
+    public function show(EntityManagerInterface $entityManager, $article): Response
     {
+
+        $repository = $entityManager->getRepository('article');
+
         return $this->render('article/article.html.twig', [
             'title' => str_replace('-', ' ', $article),
             'subtitle' => 'this is the subtitle',
