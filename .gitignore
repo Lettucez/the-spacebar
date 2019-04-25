@@ -21,3 +21,7 @@ yarn-error.log
 
 # Editor config
 .idea/
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###

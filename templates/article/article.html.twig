@@ -1,8 +1,12 @@
 {% extends "base.html.twig" %}
 
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+
 {% block main %}
     <div class="box">
-
 
         <div class="columns is-vcentered">
             <div class="column is-one-fifth">
@@ -51,40 +55,9 @@
 
 
         <div class="content">
+            <h2>{{ article.title }}</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum massa vel sem volutpat,
-                fermentum
-                dapibus arcu pretium. Ut non nunc nec mi volutpat porta maximus ut odio. Curabitur rhoncus velit eu
-                venenatis maximus. Nulla varius dui vel felis condimentum, in fringilla diam convallis. Vestibulum vitae
-                quam eu massa elementum rutrum. Maecenas nec interdum libero. Donec nibh eros, vehicula nec dapibus eu,
-                tincidunt vitae est. Pellentesque sit amet libero sed lectus tristique aliquam sit amet non quam.
-                Praesent
-                bibendum diam non sagittis lobortis.
-            </p>
-            <p>
-                Donec in rhoncus quam. Praesent dignissim nulla nec nulla sollicitudin pellentesque. Sed imperdiet
-                faucibus
-                massa non pellentesque. Ut vel dolor blandit, pharetra magna eu, dignissim nulla. Cras sagittis ipsum et
-                suscipit fermentum. Proin euismod fermentum dolor, in accumsan justo ullamcorper quis. Integer mattis
-                dui id
-                bibendum ultrices. Donec fermentum odio et metus bibendum consequat. Duis vitae velit rutrum, commodo
-                nulla
-                ac, convallis lacus. Mauris mauris leo, malesuada quis lacus non, luctus porta mauris. Etiam fermentum
-                feugiat viverra. Aliquam non sem nibh. Sed faucibus purus ac dolor vehicula pharetra. Sed sollicitudin
-                gravida orci, a vehicula odio dictum ullamcorper. Pellentesque ultrices felis et lacus laoreet, cursus
-                tempus metus volutpat. In hac habitasse platea dictumst.
-            </p>
-            <p>
-                Fusce at placerat nulla, nec imperdiet neque. Integer vitae odio sit amet eros tristique consequat id id
-                purus. Proin efficitur, felis et auctor consectetur, ligula dolor iaculis erat, non vulputate lacus quam
-                quis velit. Aenean facilisis nunc eget neque tempus egestas. Fusce ac urna finibus, placerat diam sed,
-                egestas turpis. Pellentesque eleifend lobortis metus ut pulvinar. Fusce tempor sem et pellentesque
-                cursus.
-                Curabitur vel nunc nisl. Suspendisse non tortor nisi. Phasellus ultricies purus quis dolor ornare, eget
-                suscipit leo placerat. Donec mollis arcu lorem, nec consequat justo suscipit sit amet. In consequat
-                vitae
-                orci id sagittis. Aliquam vel commodo nunc. Morbi tristique accumsan metus sed congue. Ut mi turpis,
-                pulvinar a dignissim at, rutrum ac mauris. Curabitur imperdiet mauris arcu.
+                {{ article.content }}
             </p>
         </div>
 
@@ -199,9 +172,6 @@
         </div>
 
     {% endif %}
-
-
-
 
 
 

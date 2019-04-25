@@ -34,7 +34,7 @@ class ArticleAdminController extends AbstractController
         $entityManager->flush();
 
 
-        return new Response(sprintf("Creating article with id: #%d <br>title: %s <br>slug: %s", $article->getId(), $article->getTitle(), $article->getSlug()));
+        return new Response(sprintf("Creating article with id: #%d <br>title: %s <br>slug: %s <br>Published on: %s", $article->getId(), $article->getTitle(), $article->getSlug(), $article->getPublishedAt()->format('m-d-Y')));
 
     }
 }

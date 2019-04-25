@@ -1,11 +1,17 @@
+{% set title = title is defined ? title : '' %}
+{% set subtitle = subtitle is defined ? subtitle : '' %}
 <section class="hero">
     <div class="hero-body">
         <div class="container">
             <h1 class="title">
-                {{ title }}
+                {% block hero_title %}
+                    {{ title }}
+                {% endblock %}
             </h1>
             <h2 class="subtitle">
-                {{ subtitle }}
+                {% block hero_subtitle %}
+                    {{ subtitle }}
+                {% endblock %}
             </h2>
         </div>
     </div>

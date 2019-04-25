@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,20 +36,24 @@ class ArticleController extends AbstractController
      * Shows an article.
      *
      * @param EntityManagerInterface $entityManager
-     * @param string $article Contains the url text after /news/.
-     *
+     * @param $slug
      * @return Response
      *
-     * @Route("/news/{article}", name="article_show")
+     * @Route("/news/{slug}", name="article_show")
      */
-    public function show(EntityManagerInterface $entityManager, $article): Response
+    public function show(EntityManagerInterface $entityManager, $slug): Response
     {
 
-        $repository = $entityManager->getRepository('article');
+        $repository = $entityManager->getRepository(Article::class);
+
+        /** @var Article $article */
+        $article = $repository->findOneBy(['slug' => $slug]);
+        if (!$article) {
+            throw $this->createNotFoundException('No Article found for ' . $slug);
+        }
 
         return $this->render('article/article.html.twig', [
-            'title' => str_replace('-', ' ', $article),
-            'subtitle' => 'this is the subtitle',
+            'article' => $article,
             'comments' => [
                 'comment1', 'comment2', 'comment3'
             ]
