@@ -24,11 +24,17 @@ class ArticleController extends AbstractController
      *
      * @Route("/", name="app_homepage")
      */
-    public function homepage()
+    public function homepage(EntityManagerInterface $entityManager)
     {
+
+        $repository = $entityManager->getRepository(Article::class);
+
+        $articles = $repository->findBy([], ['publishedAt' => 'DESC']);
+
         return $this->render('app/home.html.twig', [
-            'title' => 'Home',
-            'subtitle' => 'pretty baller'
+            'title' => 'The Spacebar',
+            'subtitle' => 'The best place not on earth.',
+            'articles' => $articles
         ]);
     }
 
@@ -48,11 +54,13 @@ class ArticleController extends AbstractController
 
         /** @var Article $article */
         $article = $repository->findOneBy(['slug' => $slug]);
+
         if (!$article) {
             throw $this->createNotFoundException('No Article found for ' . $slug);
         }
 
         return $this->render('article/article.html.twig', [
+            'title' => 'Articles',
             'article' => $article,
             'comments' => [
                 'comment1', 'comment2', 'comment3'

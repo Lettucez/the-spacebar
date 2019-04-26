@@ -1,13 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="box">
-        <div class="content">
-            <h2>This is the home page.</h2>
-            <p>Not much stuff going on tbh fam</p>
-            
-            <p>Article 1: <a href="{{ path('article_show', { slug: 'what-killed-the-dinosaurs'}) }}">View</a></p>
-        </div>
+    <div class="content">
+        <h2>This is the home page.</h2>
+        <p>Not much stuff going on tbh fam. But if you are interested please check out an article below.</p>
     </div>
 
+    {% for article in articles %}
+        <div class="box">
+            <a href="{{ path('article_show', { slug: article.slug }) }}">
+                <div class="columns is-vcentered">
+                    <div class="column is-one-fifth">
+                        <figure class="image is-4by3">
+                            <img src="https://bulma.io/images/placeholders/640x480.png" alt="Main Article Photo">
+                        </figure>
+                    </div>
+                    <div class="column">
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Author Icon Photo">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <h2>{{ article.title }}</h2>
+                                    <p>
+                                        <strong>John Smith</strong>
+                                        <small>@johnsmith</small>
+                                        <small>{{ article.publishedAt ? article.publishedAt|ago : 'unpublished' }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}

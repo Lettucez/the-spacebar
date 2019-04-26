@@ -1,9 +1,11 @@
+{% set box = article is defined ? '' : 'box' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Welcome to the Space Bar{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -22,14 +24,14 @@
     <div class="container">
         <div class="columns">
             <div class="column">
-                {% block main %}
-
-                {% endblock %}
+                <div class="{{ box }}">
+                    {% block main %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 {% block footer %}
     {{ include('layout/footer/footer.html.twig') }}

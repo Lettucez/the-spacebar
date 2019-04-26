@@ -1,5 +1,5 @@
-{% set title = title is defined ? title : '' %}
-{% set subtitle = subtitle is defined ? subtitle : '' %}
+{% set title = title ?? '' %}
+{% set subtitle = subtitle ?? '' %}
 <section class="hero">
     <div class="hero-body">
         <div class="container">
