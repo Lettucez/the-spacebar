@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,16 +21,17 @@ class ArticleController extends AbstractController
     /**
      * Shows the home page.
      *
+     * @param EntityManagerInterface $entityManager
      * @return Response
      *
      * @Route("/", name="app_homepage")
      */
-    public function homepage(EntityManagerInterface $entityManager)
+    public function homepage(EntityManagerInterface $entityManager) //can get repository directly e.g. ArticleRepository $repository
     {
 
         $repository = $entityManager->getRepository(Article::class);
 
-        $articles = $repository->findBy([], ['publishedAt' => 'DESC']);
+        $articles = $repository->findAllPublishedByNewest();
 
         return $this->render('app/home.html.twig', [
             'title' => 'The Spacebar',
@@ -41,23 +43,25 @@ class ArticleController extends AbstractController
     /**
      * Shows an article.
      *
-     * @param EntityManagerInterface $entityManager
-     * @param $slug
+     * Using shortcut with router wildcard shenanigans. Have to have a wildcard that matches property on entity class.
+     *
+     * @param Article $article
      * @return Response
      *
      * @Route("/news/{slug}", name="article_show")
      */
-    public function show(EntityManagerInterface $entityManager, $slug): Response
+    public function show(Article $article): Response //EntityManagerInterface $entityManager
     {
 
-        $repository = $entityManager->getRepository(Article::class);
+        /* $repository = $entityManager->getRepository(Article::class);
 
-        /** @var Article $article */
-        $article = $repository->findOneBy(['slug' => $slug]);
+          @var Article $article
+         $article = $repository->findOneBy(['slug' => $slug]);
 
-        if (!$article) {
-            throw $this->createNotFoundException('No Article found for ' . $slug);
-        }
+         if (!$article) {
+             throw $this->createNotFoundException('No Article found for ' . $slug);
+         }
+         */
 
         return $this->render('article/article.html.twig', [
             'title' => 'Articles',
@@ -66,5 +70,19 @@ class ArticleController extends AbstractController
                 'comment1', 'comment2', 'comment3'
             ]
         ]);
+    }
+
+    /**
+     *
+     *
+     * @Route("/news/{slug}/heart", name="update_article_heart", methods={"GET"})
+     * @param Article $article
+     * @return JsonResponse
+     */
+    public function updateArticleHeart(Article $article): JsonResponse
+    {
+        $updatedArticleCount = $article->getHeartCount() + 1;
+
+        return new JsonResponse(['heart' => $updatedArticleCount]);
     }
 }

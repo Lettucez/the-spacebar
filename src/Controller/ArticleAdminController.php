@@ -26,6 +26,13 @@ class ArticleAdminController extends AbstractController
 
         try {
             $article->setTitle("Ballers and Stallers")->setSlug('ballers-and-stallers-' . rand(100, 999))->setContent('Ballers are all of the rage now....')->setPublishedAt(new \DateTime(sprintf('-%d days', rand(1, 50))));
+
+            $article->setAuthor('Jim Johnson');
+
+            $article->setHeartCount(rand(5,100));
+
+            $article->setImageFilename('https://bulma.io/images/placeholders/640x480.png');
+
         } catch (\Exception $exception) {
             $exception->getMessage();
         }
