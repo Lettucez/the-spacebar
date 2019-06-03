@@ -26,7 +26,7 @@ class ArticleController extends AbstractController
      *
      * @Route("/", name="app_homepage")
      */
-    public function homepage(EntityManagerInterface $entityManager) //can get repository directly e.g. ArticleRepository $repository
+    public function homepage(EntityManagerInterface $entityManager): Response //can get repository directly e.g. ArticleRepository $repository
     {
 
         $repository = $entityManager->getRepository(Article::class);
@@ -73,7 +73,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     *
+     *  Returns the current heart count for an article and increments it by one.
      *
      * @Route("/news/{slug}/heart", name="update_article_heart", methods={"GET"})
      * @param Article $article
